@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Space Invaders Game</title>
+  <style>
+    /* CSS code */
+
+    /* Define game container */
+    #game {
+      position: relative;
+      width: 480px;
+      height: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    /* Define player ship */
+    #player {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #FFFFFF;
+    }
+
+    /* Define enemy */
+    .enemy {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #FF0000;
+    }
+
+    /* Define bullet */
+    .bullet {
+      position: absolute;
+      width: 4px;
+      height: 16px;
+      background-color: #00FF00;
+    }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <div id="player"></div>
+  </div>
+
+  <script>
+    // JavaScript code
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const gameContainer = document.getElementById("game");
+      const playerShip = document.getElementById("player");
+
+      let playerX = gameContainer.offsetWidth / 2 - playerShip.offsetWidth / 2;
+      let playerY = gameContainer.offsetHeight - playerShip.offsetHeight;
+
+      function movePlayerShip(event) {
+        playerX = event.clientX - gameContainer.getBoundingClientRect().left - playerShip.offsetWidth / 2;
+        if (playerX < 0) {
+          playerX = 0;
+        }
+        if (playerX > gameContainer.offsetWidth - playerShip.offsetWidth) {
+          playerX = gameContainer.offsetWidth - playerShip.offsetWidth;
+        }
+        playerShip.style.left = playerX + "px";
+      }
+
+      document.addEventListener("mousemove", movePlayerShip);
+
+      function gameLoop() {
+        // Game logic here
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      // Start the game loop
+      gameLoop();
+    });
+  </script>
+</body>
+</html>
